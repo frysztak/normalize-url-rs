@@ -3,11 +3,11 @@ name = "normalize-url-rs"
 description = "Port of Node.js URL normalization library"
 version = "0.1.0"
 edition = "2021"
-repository = ""
+repository = "https://github.com/frysztak/normalize-url-rs"
+homepage = "https://github.com/frysztak/normalize-url-rs"
 license = "MIT"
 keywords = ["url", "normalize", "normalization"]
 categories = ["web-programming"]
-
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

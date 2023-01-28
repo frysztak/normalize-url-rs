@@ -6,7 +6,7 @@ for the [Rust](http://rust-lang.org/) programming language.
 Documentation: https://docs.rs/normalize-url-rs
 
 ## Sample usage
-```
+```rs
 use normalize_url_rs::{normalize_url, OptionsBuilder};
 
 let options = OptionsBuilder::default().build().unwrap();

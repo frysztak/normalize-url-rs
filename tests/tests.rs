@@ -60,7 +60,7 @@ mod tests {
     )]
     #[case("https://i.vimeocdn.com/filter/overlay?src0=https://i.vimeocdn.com/video/598160082_1280x720.jpg&src1=https://f.vimeocdn.com/images_v6/share/play_icon_overlay.png", "https://i.vimeocdn.com/filter/overlay?src0=https://i.vimeocdn.com/video/598160082_1280x720.jpg&src1=https://f.vimeocdn.com/images_v6/share/play_icon_overlay.png")]
     fn main_tests(#[case] input: String, #[case] expected: String) {
-        let result = normalize_url(input, OptionsBuilder::default().build().unwrap())
+        let result = normalize_url(&input, OptionsBuilder::default().build().unwrap())
             .expect("Normalization failed");
         assert_eq!(result, expected);
     }
@@ -77,7 +77,7 @@ mod tests {
             .default_protocol(protocol)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -127,7 +127,7 @@ mod tests {
             .strip_authentication(strip_auth)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -141,7 +141,7 @@ mod tests {
             .strip_protocol(true)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -238,7 +238,7 @@ mod tests {
             .strip_text_fragment(strip_text_fragment)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -254,7 +254,7 @@ mod tests {
     )]
     fn strip_www_tests(#[case] input: String, #[case] strip: bool, #[case] expected: String) {
         let options = OptionsBuilder::default().strip_www(strip).build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -265,7 +265,7 @@ mod tests {
     )]
     fn remove_query_parameters_tests_1(#[case] input: String, #[case] expected: String) {
         let options = OptionsBuilder::default().build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -285,7 +285,7 @@ mod tests {
             ]))
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -302,7 +302,7 @@ mod tests {
             .remove_query_parameters(RemoveQueryParametersOptions::All)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -319,7 +319,7 @@ mod tests {
             .remove_query_parameters(RemoveQueryParametersOptions::None)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -340,7 +340,7 @@ mod tests {
             ])
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -348,7 +348,7 @@ mod tests {
     #[case("https://sindresorhus.com", "https://sindresorhus.com")]
     fn force_http_tests_1(#[case] input: String, #[case] expected: String) {
         let options = OptionsBuilder::default().build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -358,7 +358,7 @@ mod tests {
     #[case("//sindresorhus.com", "http://sindresorhus.com")]
     fn force_http_tests_2(#[case] input: String, #[case] expected: String) {
         let options = OptionsBuilder::default().force_http(true).build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -366,7 +366,7 @@ mod tests {
     #[case("https://sindresorhus.com", "https://sindresorhus.com")]
     fn force_https_tests_1(#[case] input: String, #[case] expected: String) {
         let options = OptionsBuilder::default().build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -376,7 +376,7 @@ mod tests {
     #[case("//sindresorhus.com", "https://sindresorhus.com")]
     fn force_https_tests_2(#[case] input: String, #[case] expected: String) {
         let options = OptionsBuilder::default().force_https(true).build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -395,7 +395,7 @@ mod tests {
     )]
     fn remove_trailing_slash_tests_1(#[case] input: String, #[case] expected: String) {
         let options = OptionsBuilder::default().build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -416,7 +416,7 @@ mod tests {
             .remove_trailing_slash(false)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -430,7 +430,7 @@ mod tests {
             .remove_explicit_port(true)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -455,7 +455,7 @@ mod tests {
             .remove_single_slash(false)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -484,7 +484,7 @@ mod tests {
             .remove_trailing_slash(false)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -499,7 +499,7 @@ mod tests {
     )]
     fn remove_directory_index_tests_1(#[case] input: String, #[case] expected: String) {
         let options = OptionsBuilder::default().build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -534,7 +534,7 @@ mod tests {
             ]))
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -558,7 +558,7 @@ mod tests {
             ]))
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -571,7 +571,7 @@ mod tests {
             .remove_directory_index(RemoveDirectoryIndexOptions::Default)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -595,7 +595,7 @@ mod tests {
             .remove_trailing_slash(true)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -615,7 +615,7 @@ mod tests {
             .remove_trailing_slash(false)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -638,7 +638,7 @@ mod tests {
             .sort_query_parameters(true)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -661,7 +661,7 @@ mod tests {
             .sort_query_parameters(false)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -671,7 +671,7 @@ mod tests {
     #[case("/relative/path/")]
     fn invalid_url_tests(#[case] input: String) {
         let options = OptionsBuilder::default().build().unwrap();
-        let result = normalize_url(input, options).expect_err("Normalization succeeded");
+        let result = normalize_url(&input, options).expect_err("Normalization succeeded");
         assert!(matches!(result, NormalizeUrlError::UnexpectedError(_)));
     }
 
@@ -738,7 +738,7 @@ mod tests {
     )]
     fn remove_duplicate_slashes_tests(#[case] input: String, #[case] expected: String) {
         let options = OptionsBuilder::default().build().unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
@@ -749,14 +749,14 @@ mod tests {
             .sort_query_parameters(true)
             .build()
             .unwrap();
-        let result = normalize_url(input, options).expect("Normalization failed");
+        let result = normalize_url(&input, options).expect("Normalization failed");
         assert_eq!(result, expected);
     }
 
     #[test]
     fn returns_error_if_force_http_and_force_https_are_both_set() {
         let result = normalize_url(
-            "".to_string(),
+            "",
             OptionsBuilder::default()
                 .force_http(true)
                 .force_https(true)

@@ -8,7 +8,7 @@ for the [Rust](http://rust-lang.org/) programming language.
 use normalize_url_rs::{normalize_url, OptionsBuilder};
 
 let options = OptionsBuilder::default().build().unwrap();
-let result = normalize_url("https://www.rust-lang.org/".to_string(), options);
+let result = normalize_url("https://www.rust-lang.org/", options);
 
 assert_eq!(result.unwrap(), "https://rust-lang.org")
 ```
@@ -178,12 +178,12 @@ pub enum NormalizeUrlError {
     UnexpectedError(#[from] anyhow::Error),
 }
 
-pub fn normalize_url(url: String, options: Options) -> Result<String, NormalizeUrlError> {
+pub fn normalize_url(url: &str, options: Options) -> Result<String, NormalizeUrlError> {
     if options.force_http && options.force_https {
         return Err(NormalizeUrlError::ForceHttpAndHttpAreExclusive);
     }
 
-    let mut url_string = url.trim().to_string();
+    let mut url_string = url.trim().to_owned();
 
     // Data URL
     //if (/^data:/i.test(urlString)) {

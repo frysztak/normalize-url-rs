@@ -10,7 +10,7 @@ Documentation: https://docs.rs/normalize-url-rs
 use normalize_url_rs::{normalize_url, OptionsBuilder};
 
 let options = OptionsBuilder::default().build().unwrap();
-let result = normalize_url("https://www.rust-lang.org/".to_string(), options);
+let result = normalize_url("https://www.rust-lang.org/", options);
 
 assert_eq!(result.unwrap(), "https://rust-lang.org")
 ```

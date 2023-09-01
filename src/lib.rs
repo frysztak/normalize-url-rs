@@ -67,7 +67,7 @@ pub enum RemoveDirectoryIndexOptions {
     List(Vec<Regex>),
 }
 
-#[derive(Builder, Debug)]
+#[derive(Builder, Debug, Clone)]
 #[builder(setter(into))]
 /// Normalization options.
 pub struct Options {
@@ -178,7 +178,7 @@ pub enum NormalizeUrlError {
     UnexpectedError(#[from] anyhow::Error),
 }
 
-pub fn normalize_url(url: &str, options: Options) -> Result<String, NormalizeUrlError> {
+pub fn normalize_url(url: &str, options: &Options) -> Result<String, NormalizeUrlError> {
     if options.force_http && options.force_https {
         return Err(NormalizeUrlError::ForceHttpAndHttpAreExclusive);
     }

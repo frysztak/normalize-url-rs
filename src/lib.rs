@@ -8,7 +8,7 @@ for the [Rust](http://rust-lang.org/) programming language.
 use normalize_url_rs::{normalize_url, OptionsBuilder};
 
 let options = OptionsBuilder::default().build().unwrap();
-let result = normalize_url("https://www.rust-lang.org/", options);
+let result = normalize_url("https://www.rust-lang.org/", &options);
 
 assert_eq!(result.unwrap(), "https://rust-lang.org")
 ```
